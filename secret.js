@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return c.substring(cname.length, c.length);
             }
         }
-        return "";
+      
     }
 
     const verifyCookie = getCookie('verified');
@@ -34,5 +34,8 @@ function about() {
     iframe.src = "https://" + url;
   }
   win.document.body.appendChild(iframe);
-  window.close();
+  setTimeout(function() {
+    window.close(); // Close the current window after a delay
+},250); // Wait for .25 second before closing the window
+  
 }
