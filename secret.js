@@ -35,7 +35,32 @@ function about() {
   }
   win.document.body.appendChild(iframe);
   setTimeout(function() {
-    window.close(); // Close the current window after a delay
-},250); // Wait for .25 second before closing the window
+    tryCloseWindow(); // Close the current window after a delay
+},50); // Wait for .25 second before closing the window
   
 }
+
+    function tryCloseWindow() {
+        window.close();
+
+        // If the window is not closed, try other methods
+        if (!window.closed) {
+            // Attempt to close using window.opener
+            if (window.opener) {
+                window.opener = window;
+                window.close();
+            }
+
+            // Attempt to close using top window reference
+            if (!window.closed) {
+                top.window.close();
+            }
+
+            // As a last resort, continuously attempt to close the window
+            if (!window.closed) {
+                setTimeout(tryCloseWindow, 500); // Retry every second
+            } else {
+                alert("This tab could not be closed automatically. Please close it manually.");
+            }
+        }
+    }
