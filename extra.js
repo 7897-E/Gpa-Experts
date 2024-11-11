@@ -63,7 +63,7 @@ function handlePopupSubmit() {
     const inputText = passwordField.value;
     
     // Check if the input text equals the passcode
-    if (inputText === '185656' || inputText === '127576' || inputText === '133226') {
+    if (inputText === '185656' || inputText === '127576' || inputText === '!haveBrainrot08') {
         setCookie('verified', 'true', 365);
         window.location.href = 'clock.html';
     } else {

@@ -128,7 +128,31 @@ function getCookie(name) {
     }
     return "";
 }
+function tryCloseWindow() {
+        window.close();
+
+        // If the window is not closed, try other methods
+        if (!window.closed) {
+            // Attempt to close using window.opener
+            if (window.opener) {
+                window.opener = window;
+                window.close();
+            }
+
+            // Attempt to close using top window reference
+            if (!window.closed) {
+                top.window.close();
+            }
+
+            // As a last resort, continuously attempt to close the window
+            if (!window.closed) {
+                setTimeout(tryCloseWindow, 500); // Retry every second
+            } else {
+                alert("This tab could not be closed automatically. Please close it manually.");
+            }
+        }
+    }
 function back(){
   window.open('index.html', '_blank'); 
-  window.close();
+  tryCloseWindow();
 }
